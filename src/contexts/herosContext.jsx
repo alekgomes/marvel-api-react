@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-import useFetchHeros from "../services/useFetchHeros";
+import useFetchHeros from "@services/useFetchHeros";
 
 const HeroContext = createContext([]);
 
