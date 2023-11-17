@@ -20,7 +20,7 @@ const StyledLabel = styled.label`
   width: 100%;
 
   &:before {
-    content: url("'../../assets/icons/Shape.png'");
+    content: url("../../assets/icons/Shape.png");
     transform: translate(200%, 2px);
   }
 `;
