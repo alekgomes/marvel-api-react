@@ -9,6 +9,7 @@ export function HeroContextProvider({ children }) {
   const [showFavoriteHeros, setShowFavoriteHeros] = useState(false);
   const [favoriteHeros, setFavoriteHeros] = useState([]);
   const [sortState, setSortState] = useState("ASC");
+  const [filterParam, setFilterParam] = useState(null);
 
   const addFavoriteHero = (hero) => {
     const index = favoriteHeros.findIndex((favHero) => favHero.id == hero.id);
@@ -25,6 +26,10 @@ export function HeroContextProvider({ children }) {
   const displayedHeros = () => {
     if (showFavoriteHeros) return favoriteHeros;
     if (sortState == "DESC") return heros.toReversed();
+    if (filterParam)
+      return heros.filter((hero) =>
+        hero.name.toLowerCase().includes(filterParam.toLowerCase())
+      );
     return heros;
   };
 
@@ -40,6 +45,7 @@ export function HeroContextProvider({ children }) {
         addFavoriteHero,
         setShowFavoriteHeros,
         toggleSort,
+        setFilterParam,
       }}
     >
       {children}

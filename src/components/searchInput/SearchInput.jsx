@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useHeroContext } from "../../contexts/herosContext";
 
 const StyledInput = styled.input.attrs({
   type: "text",
@@ -25,9 +26,16 @@ const StyledLabel = styled.label`
 `;
 
 function SearchInput() {
+  const { setFilterParam } = useHeroContext();
+
+  const handleOnChange = ({ target }) => {
+    if (target.value == "") return setFilterParam(null);
+    setFilterParam(target.value);
+  };
+
   return (
     <StyledLabel>
-      <StyledInput />
+      <StyledInput onChange={handleOnChange} />
     </StyledLabel>
   );
 }
