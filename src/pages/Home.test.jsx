@@ -1,13 +1,21 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+
 import { expect, vi } from "vitest";
 
 import Home from "./Home";
+import { HeroContextProvider } from "../contexts/herosContext";
 
 vi.spyOn(AbortController.prototype, "abort").mockImplementation(() => {});
 
 describe("Home", () => {
   it("Should correctly display favorites heros", async () => {
-    render(<Home />);
+    render(
+      <HeroContextProvider>
+        <Home />
+      </HeroContextProvider>,
+      { wrapper: BrowserRouter }
+    );
 
     const hero1 = await screen.findByAltText(/Favorite Aaron Stack/i);
     const hero2 = await screen.findByAltText(/Favorite Adam Destine/i);
@@ -22,7 +30,12 @@ describe("Home", () => {
   });
 
   it("Should sort items accordingly to user selection", async () => {
-    render(<Home />);
+    render(
+      <HeroContextProvider>
+        <Home />
+      </HeroContextProvider>,
+      { wrapper: BrowserRouter }
+    );
 
     const herosAsc = await screen.findAllByAltText(/Favorite/i);
     const firstHero = herosAsc.shift();
@@ -30,10 +43,13 @@ describe("Home", () => {
   });
 
   it("Should change the `active` prop when clicked", () => {
-    render(<Home />);
+    render(
+      <HeroContextProvider>
+        <Home />
+      </HeroContextProvider>
+    );
 
     const preferedOnly = screen.getByText(/Somente Favoritos/i);
-
     fireEvent.click(preferedOnly);
 
     expect(preferedOnly.classList).toContainEqual("active");
