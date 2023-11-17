@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useHeroContext } from "../../contexts/herosContext";
+import { useHeroContext } from "@contexts/herosContext";
 
 const StyledInput = styled.input.attrs({
   type: "text",
@@ -20,7 +20,7 @@ const StyledLabel = styled.label`
   width: 100%;
 
   &:before {
-    content: url("/src/assets/icons/Shape.png");
+    content: url("'../../assets/icons/Shape.png'");
     transform: translate(200%, 2px);
   }
 `;

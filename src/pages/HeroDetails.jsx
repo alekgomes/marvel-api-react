@@ -1,7 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useHeroContext } from "../contexts/herosContext";
+import MarvelLogo from "@assets/images/logo/Group@1,5x.svg";
+import HeartEmpty from "@assets/icons/Heart-Empty.png";
+import HeartFullfiled from "@assets/icons/Heart-Fullfiled.png";
+import FallbackImage from "@assets/images/fallback-image.jpg";
+import BookIcon from "@assets/icons/Book.png";
+import VideoIcon from "@assets/icons/Video.png";
+import ReviewIcon from "@assets/icons/Review.png";
 
-import MarvelLogo from "../assets/images/logo/Group@1,5x.svg";
 import {
   PageContainer,
   StyledContainer,
@@ -19,15 +25,12 @@ const HeroDetails = () => {
   const hero = heros.find((h) => h.id == heroId);
 
   const handleImgError = (e) => {
-    e.target.src = "/src/assets/images/fallback-image.jpg";
+    e.target.src = FallbackImage;
   };
 
   const isFavorite = favoriteHeros.findIndex((h) => h.id == hero.id);
 
-  const iconSrc =
-    isFavorite < 0
-      ? "/src/assets/icons/Heart-Empty.png"
-      : "/src/assets/icons/Heart-Fullfiled.png";
+  const iconSrc = isFavorite < 0 ? HeartEmpty : HeartFullfiled;
 
   const comics =
     hero.comics.items <= 10
@@ -52,33 +55,21 @@ const HeroDetails = () => {
                 <div>
                   <p className="bold">Quadrinhos</p>
                   <p className="bold">
-                    <img
-                      className="padding"
-                      src="/src/assets/icons/Book.png"
-                      alt=""
-                    />
+                    <img className="padding" src={BookIcon} alt="" />
                     {hero.comics.available}
                   </p>
                 </div>
                 <div>
                   <p className="bold">Filmes</p>
                   <p className="bold">
-                    <img
-                      className="padding"
-                      src="/src/assets/icons/Video.png"
-                      alt=""
-                    />
+                    <img className="padding" src={VideoIcon} alt="" />
                     {hero.series.available}
                   </p>
                 </div>
               </div>
               <p>
                 <span className="bold">Rating:</span>
-                <img
-                  className="padding"
-                  src="/src/assets/icons/Review.png"
-                  alt=""
-                />
+                <img className="padding" src={ReviewIcon} alt="" />
               </p>
               <p>
                 <span className="bold">Último quadrinhos:</span> 13 fev. 2020

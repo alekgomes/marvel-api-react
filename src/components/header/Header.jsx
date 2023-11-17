@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import MarvelLogo from "../../assets/images/logo/Group.png";
+import MarvelLogo from "@assets/images/logo/Group.png";
 
 const StyledHeader = styled.header`
   text-align: center;

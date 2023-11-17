@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import clsx from "clsx";
 import { useState } from "react";
-import { useHeroContext } from "../../contexts/herosContext";
+import { useHeroContext } from "@contexts/herosContext";
+import HeartFullfiled from "@assets/icons/Heart-Fullfiled.png";
+import HeartEmpty from "@assets/icons/Heart-Empty.png";
+import HeroIcon from "@assets/icons/Hero.png";
 
 const StyledButton = styled.button`
   border: none;
@@ -40,9 +43,7 @@ const HerosFilters = () => {
     ? "Mostrar todos os heróis"
     : "Somente Favoritos";
 
-  const favoriteIconSrc = state.onlyFavorites
-    ? "/src/assets/icons/Heart-Empty.png"
-    : "/src/assets/icons/Heart-Fullfiled.png";
+  const favoriteIconSrc = state.onlyFavorites ? HeartEmpty : HeartFullfiled;
 
   const handleFavoriteClick = ({ target }) => {
     handleClick({ target });
@@ -61,7 +62,7 @@ const HerosFilters = () => {
         name="ordered"
         onClick={handleOrdered}
       >
-        <img src="/src/assets/icons/Hero.png" alt="Heros Icon" />
+        <img src={HeroIcon} alt="Heros Icon" />
         {sortButtonText}
       </StyledButton>
       <StyledButton

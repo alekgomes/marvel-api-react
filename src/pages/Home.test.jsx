@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { expect, vi } from "vitest";
 
 import Home from "./Home";
-import { HeroContextProvider } from "../contexts/herosContext";
+import { HeroContextProvider } from "@contexts/herosContext";
 
 vi.spyOn(AbortController.prototype, "abort").mockImplementation(() => {});
 

@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 import { StyledCard } from "./styles";
-import { useHeroContext } from "../../contexts/herosContext";
+import { useHeroContext } from "@contexts/herosContext";
+import HeartEmpty from "@assets/icons/Heart-Empty.png";
+import HeartFullfiled from "@assets/icons/Heart-Fullfiled.png";
+import FallbackImage from "@assets/images/fallback-image.jpg";
 
 const Card = ({ hero }) => {
   const { addFavoriteHero, favoriteHeros } = useHeroContext();
 
   const isFavorite = favoriteHeros.findIndex((h) => h.id == hero.id);
 
-  const iconSrc =
-    isFavorite >= 0
-      ? "/src/assets/icons/Heart-Fullfiled.png"
-      : "/src/assets/icons/Heart-Empty.png";
+  const iconSrc = isFavorite >= 0 ? HeartFullfiled : HeartEmpty;
 
   const handleFavoriteClick = () => {
     addFavoriteHero(hero);
   };
 
   const handleImgError = (e) => {
-    e.target.src = "/src/assets/images/fallback-image.jpg";
+    e.target.src = FallbackImage;
   };
 
   return (

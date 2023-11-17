@@ -1,7 +1,7 @@
 import { HerosFilters } from "@components";
 import { StyledFlexContainer, StyledCardGridContainer } from "./styles";
 import Card from "./Card";
-import { useHeroContext } from "../../contexts/herosContext";
+import { useHeroContext } from "@contexts/herosContext";
 
 function HerosContainer() {
   const { heros } = useHeroContext();
