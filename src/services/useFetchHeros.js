@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import md5 from "md5";
 
 const useFetchHeros = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [heros, setHeros] = useState([]);
-  const [error, setError] = useState(false);
+  // TODO
+  // Add error state
+  // Add loading state
 
   const ts = Date.now();
   // TODO - levar essas keys para o .env
@@ -18,20 +19,14 @@ const useFetchHeros = () => {
     const controller = new AbortController();
 
     const getHeros = async () => {
-      setIsLoading(true);
       try {
         const response = await fetch(url, { signal: controller.signal });
-        if (!response.ok) {
-          setError(true);
-        }
-
         const { data } = await response.json();
-        setIsLoading(false);
         if (!data) return;
         setHeros(data.results);
       } catch (err) {
         if (!controller.signal.aborted) {
-          setError(true);
+          throw new Error("Erro ao buscar heróis");
         }
       }
     };
