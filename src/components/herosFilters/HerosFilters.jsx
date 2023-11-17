@@ -19,14 +19,32 @@ const StyledButton = styled.button`
 
 const StyledContainer = styled.div`
   display: flex;
+  gap: 2rem;
 `;
 
-const HerosFilters = () => {
+const HerosFilters = ({ setShowFavoriteHeros }) => {
   const [state, setState] = useState({ ordered: false, onlyFavorites: false });
 
   const handleClick = ({ target }) => {
     const { name } = target;
     setState({ ...state, [name]: !state[name] });
+  };
+
+  const sortButtonText = state.ordered
+    ? "Ordenar por nome crescente - A/Z"
+    : "Ordenar por nome decrescente - Z/A";
+
+  const preferedButtonText = state.onlyFavorites
+    ? "Mostrar todos os heróis"
+    : "Somente Favoritos";
+
+  const favoriteIconSrc = state.onlyFavorites
+    ? "/src/assets/icons/Heart-Empty.png"
+    : "/src/assets/icons/Heart-Fullfiled.png";
+
+  const handleFavoriteClick = ({ target }) => {
+    handleClick({ target });
+    setShowFavoriteHeros((prevState) => !prevState);
   };
 
   return (
@@ -37,15 +55,15 @@ const HerosFilters = () => {
         onClick={handleClick}
       >
         <img src="/src/assets/icons/Hero.png" alt="Heros Icon" />
-        Ordenar por nome - A/Z
+        {sortButtonText}
       </StyledButton>
       <StyledButton
         className={clsx({ active: state.onlyFavorites })}
         name="onlyFavorites"
-        onClick={handleClick}
+        onClick={handleFavoriteClick}
       >
-        <img src="/src/assets/icons/Heart-Fullfiled.png" alt="Herth icon" />
-        Somente Favoritos
+        <img src={favoriteIconSrc} alt="Herth icon" />
+        {preferedButtonText}
       </StyledButton>
     </StyledContainer>
   );
