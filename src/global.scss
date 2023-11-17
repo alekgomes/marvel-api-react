@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Work+Sans:wght@400;700&display=swap');
+
+:root {
+  --red: #FF1510;
+  --salmon: #FDECEC;
+  --green: #E7F6E7;
+
+  --text-dark: #404040;
+  --text-grey: #8c8c8c;
+  --text-light-grey: #B9B9B9;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Work Sans', sans-serif;
+}
