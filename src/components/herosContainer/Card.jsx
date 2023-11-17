@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { StyledCard } from "./styles";
 import { useHeroContext } from "../../contexts/herosContext";
 
@@ -20,23 +21,25 @@ const Card = ({ hero }) => {
   };
 
   return (
-    <StyledCard>
-      <img
-        className="thumbnail"
-        src={hero.thumbnail.path}
-        alt={`${hero.name} thumbnail`}
-        onError={(e) => handleImgError(e)}
-      />
-      <p>
-        {hero.name}
+    <Link to={`/${hero.name}`}>
+      <StyledCard>
         <img
-          className="heart-icon"
-          src={iconSrc}
-          alt={`Favorite ${hero.name}`}
-          onClick={handleFavoriteClick}
+          className="thumbnail"
+          src={hero.thumbnail.path}
+          alt={`${hero.name} thumbnail`}
+          onError={(e) => handleImgError(e)}
         />
-      </p>
-    </StyledCard>
+        <p>
+          {hero.name}
+          <img
+            className="heart-icon"
+            src={iconSrc}
+            alt={`Favorite ${hero.name}`}
+            onClick={handleFavoriteClick}
+          />
+        </p>
+      </StyledCard>
+    </Link>
   );
 };
 
