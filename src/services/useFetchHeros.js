@@ -7,7 +7,7 @@ const useFetchHeros = () => {
   // Add error state
   // Add loading state
 
-  const ts = Date.now();
+  const ts = Date.now(); 
   // TODO - levar essas keys para o .env
   const privateKey = "ee4cc2cb1737737906ea469eb1537028190a57c9";
   const publicKey = "452f43d7e8860de77e75e535ecbf11b0";

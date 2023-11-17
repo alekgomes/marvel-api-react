@@ -1,45 +1,45 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { StyledCard } from "./styles";
 import { useHeroContext } from "../../contexts/herosContext";
 
 const Card = ({ hero }) => {
-  const [isPreferred, setIsPreferred] = useState(false);
-  const { addFavoriteHero } = useHeroContext();
+  const { addFavoriteHero, favoriteHeros } = useHeroContext();
+
+  const isFavorite = favoriteHeros.findIndex((h) => h.id == hero.id);
+
+  const iconSrc =
+    isFavorite >= 0
+      ? "/src/assets/icons/Heart-Fullfiled.png"
+      : "/src/assets/icons/Heart-Empty.png";
+
+  const handleFavoriteClick = () => {
+    addFavoriteHero(hero);
+  };
 
   const handleImgError = (e) => {
     e.target.src = "/src/assets/images/fallback-image.jpg";
   };
 
-  const iconSrc = isPreferred
-    ? "/src/assets/icons/Heart-Fullfiled.png"
-    : "/src/assets/icons/Heart-Empty.png";
-
-  const handleFavoriteClick = () => {
-    setIsPreferred(!isPreferred);
-    addFavoriteHero(hero);
-  };
-
   return (
-    <Link to={`/${hero.name}`}>
-      <StyledCard>
+    <StyledCard>
+      <Link to={`/${hero.id}`}>
         <img
           className="thumbnail"
-          src={hero.thumbnail.path}
+          src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
           alt={`${hero.name} thumbnail`}
           onError={(e) => handleImgError(e)}
         />
-        <p>
-          {hero.name}
-          <img
-            className="heart-icon"
-            src={iconSrc}
-            alt={`Favorite ${hero.name}`}
-            onClick={handleFavoriteClick}
-          />
-        </p>
-      </StyledCard>
-    </Link>
+      </Link>
+      <p>
+        {hero.name}
+        <img
+          className="heart-icon"
+          src={iconSrc}
+          alt={`Favorite ${hero.name}`}
+          onClick={handleFavoriteClick}
+        />
+      </p>
+    </StyledCard>
   );
 };
 

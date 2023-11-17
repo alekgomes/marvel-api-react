@@ -15,6 +15,7 @@ export function HeroContextProvider({ children }) {
     const index = favoriteHeros.findIndex((favHero) => favHero.id == hero.id);
 
     if (index == -1) {
+      if (favoriteHeros.length >= 5) return;
       setFavoriteHeros((prevState) => [...prevState, hero]);
     } else {
       setFavoriteHeros((prevState) =>
@@ -24,12 +25,22 @@ export function HeroContextProvider({ children }) {
   };
 
   const displayedHeros = () => {
-    if (showFavoriteHeros) return favoriteHeros;
-    if (sortState == "DESC") return heros.toReversed();
+    if (showFavoriteHeros && filterParam)
+      return favoriteHeros.filter((hero) =>
+        hero.name.toLowerCase().includes(filterParam.toLowerCase())
+      );
+
+    if (showFavoriteHeros && sortState == "DESC")
+      return favoriteHeros.toReversed();
+
     if (filterParam)
       return heros.filter((hero) =>
         hero.name.toLowerCase().includes(filterParam.toLowerCase())
       );
+
+    if (showFavoriteHeros) return favoriteHeros;
+
+    if (sortState == "DESC") return favoriteHeros.toReversed();
     return heros;
   };
 
@@ -46,6 +57,7 @@ export function HeroContextProvider({ children }) {
         setShowFavoriteHeros,
         toggleSort,
         setFilterParam,
+        favoriteHeros,
       }}
     >
       {children}
