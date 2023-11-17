@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import clsx from "clsx";
 import { useState } from "react";
+import { useHeroContext } from "../../contexts/herosContext";
 
 const StyledButton = styled.button`
   border: none;
@@ -22,8 +23,9 @@ const StyledContainer = styled.div`
   gap: 2rem;
 `;
 
-const HerosFilters = ({ setShowFavoriteHeros }) => {
+const HerosFilters = () => {
   const [state, setState] = useState({ ordered: false, onlyFavorites: false });
+  const { setShowFavoriteHeros, toggleSort } = useHeroContext();
 
   const handleClick = ({ target }) => {
     const { name } = target;
@@ -47,12 +49,17 @@ const HerosFilters = ({ setShowFavoriteHeros }) => {
     setShowFavoriteHeros((prevState) => !prevState);
   };
 
+  const handleOrdered = ({ target }) => {
+    handleClick({ target });
+    toggleSort();
+  };
+
   return (
     <StyledContainer>
       <StyledButton
         className={clsx({ active: state.ordered })}
         name="ordered"
-        onClick={handleClick}
+        onClick={handleOrdered}
       >
         <img src="/src/assets/icons/Hero.png" alt="Heros Icon" />
         {sortButtonText}

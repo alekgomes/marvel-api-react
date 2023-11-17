@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { StyledCard } from "./styles";
+import { useHeroContext } from "../../contexts/herosContext";
 
-const Card = ({ hero, addFavoriteHero }) => {
+const Card = ({ hero }) => {
   const [isPreferred, setIsPreferred] = useState(false);
+  const { addFavoriteHero } = useHeroContext();
 
   const handleImgError = (e) => {
     e.target.src = "/src/assets/images/fallback-image.jpg";
